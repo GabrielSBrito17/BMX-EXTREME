@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from tkinter.ttk import Combobox
+from ibge.localidades import *
 
 master = Tk()
 
@@ -19,11 +20,41 @@ resposta = Label(master, font="Arial 40", text="")
 #positions label
 labelimagem_bmx.place(x=0, y=0)
 
+#list category
+list_cadegory = ["CATEGORIAS","Iniciante", "Feminino até 9 anos", "Feminino 10/12", "Feminino 13/16", "Feminino 17+", "Pré Bike", "Boys5/6",
+                 "Boys 7/8",  "Boys 9/10", "Boys 11/12", "Boys 13/14", "Boys 15/16", "Expert 17/24", "Expert 25/29", "Expert 30/39",
+                 "MTBx", "Cruiser 30/39", "Cruiser 40/49", "Cruiser 50+", "Pró Cruiser", "Elite Man", "Master 40+"]
+dados_estados = Estados()
+list_estados = dados_estados.getSigla()
+dados_cidades = Municipios()
+list_cidades = dados_cidades.getNome()
+print(list_cidades)
 #functions
-def category():
-    category = combobox.get()
-    print(category)
-    return category
+combobox = Combobox(master)
+def states():
+    combo_state = combobox
+    combo_state['values'] = (list_estados)
+    combo_state.current(0)
+    combo_state.place(width=701, height=86, x=909, y=502)
+    states = combo_state.get()
+    return states
+def city():
+    combo_city = combobox
+    if states():
+        combo_city['values'] = (list_cidades)
+        combo_city.current(0)
+        combo_city.place(width=701, height=86, x=909, y=502)
+        city = combo_city.get()
+        return city
+    else:
+        print("None")
+def categoria():
+    combo_categoria = combobox
+    combo_categoria['values'] = (list_cadegory)
+    combo_categoria.current(0)
+    combo_categoria.place(width=700, height=87, x=96, y=361)
+    categoria = combo_categoria.get()
+    return categoria
 
 
 def clique_esquerdo_mouse(arg):
@@ -38,33 +69,30 @@ def clique_esquerdo_mouse(arg):
         print(f'width={arg.x - x1}, height={arg.y - y1}, x={x1}, y={y1}')
 
 #create buttons
-bt1 = Entry(master, text="NOME DO PILOTO", font="Arial 30", justify=CENTER)
-bt2 = Button(master, text="CATEGORIA", command=category, font="Arial 30", justify=CENTER)
-bt3 = Entry(master, text="IDADE", font="Arial 30", justify=CENTER)
-bt4 = Entry(master, text="CIDADE", font="Arial 30", justify=CENTER)
-bt5 = Entry(master, text="ESTADO", font="Arial 30", justify=CENTER)
-button_cadastro = Button(master, text="CADASTRAR", font="Arial 30")
+nome_piloto = Entry(master, text="NOME DO PILOTO", font="Arial 30", justify=CENTER)
+categoria = Button(master, text="CATEGORIA", command=categoria, font="Arial 50", justify=CENTER)
+idade = Entry(master, text="IDADE", font="Arial 30", justify=CENTER)
+cidade = Button(master, text="CIDADE", font="Arial 30", command=city, justify=CENTER)
+estado = Button(master, text="ESTADO", font="Arial 30", command=states, justify=CENTER)
+placa = Entry(master, text="PLACA", font="Arial 30", justify=CENTER)
+button_cadastro = Button(master, text="CADASTRAR", command=categoria, font="Arial 30")
 button_elite = Button(master, text="ELITE-MAN", font="Arial 30")
 
 #positions buttons
-bt1.place(width=1516, height=84, x=96, y=244)
-bt2.place(width=700, height=87, x=96, y=361)
-bt3.place(width=56, height=5, x=1688, y=949)
-bt4.place(width=56, height=5, x=1688, y=949)
-bt5.place(width=56, height=5, x=1688, y=949)
+nome_piloto.place(width=1516, height=84, x=96, y=244)
+categoria.place(width=700, height=87, x=96, y=361)
+idade.place(width=699, height=85, x=911, y=363)
+cidade.place(width=700, height=84, x=96, y=503)
+estado.place(width=701, height=86, x=909, y=502)
+placa.place(width=679, height=67, x=500, y=613)
 button_cadastro.place(width=699, height=144, x=496, y=709)
 button_elite.place(width=267, height=72, x=1321, y=677)
 
-#list category
-list_cadegory = ["CATEGORIAS","Iniciante", "Feminino até 9 anos", "Feminino 10/12", "Feminino 13/16", "Feminino 17+", "Pré Bike", "Boys5/6",
-                 "Boys 7/8",  "Boys 9/10", "Boys 11/12", "Boys 13/14", "Boys 15/16", "Expert 17/24", "Expert 25/29", "Expert 30/39",
-                 "MTBx", "Cruiser 30/39", "Cruiser 40/49", "Cruiser 50+", "Pró Cruiser", "Elite Man", "Master 40+"]
 
-#listbox
-combobox = Combobox(master)
-combobox['values'] = (list_cadegory)
-combobox.current(0)
-combobox.grid(row=1, column=0, padx=134, pady=5, sticky=NSEW)
+
+
+#combo_box
+
 
 
 #global variables

@@ -38,6 +38,7 @@ def states():
     combo_state.place(width=701, height=86, x=909, y=502)
     states = combo_state.get()
     return states
+
 def city():
     combo_city = combobox
     if states():
@@ -48,6 +49,7 @@ def city():
         return city
     else:
         print("None")
+
 def categoria():
     combo_categoria = combobox
     combo_categoria['values'] = (list_cadegory)

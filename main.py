@@ -28,7 +28,7 @@ dados_estados = Estados()
 list_estados = dados_estados.getSigla()
 dados_cidades = Municipios()
 list_cidades = dados_cidades.getNome()
-print(list_cidades)
+
 #functions
 combobox = Combobox(master)
 def states():
